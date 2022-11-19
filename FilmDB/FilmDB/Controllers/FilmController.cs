@@ -16,9 +16,9 @@ namespace FilmDB.Controllers
             FilmModel film = new FilmModel();
             film.Title = "Rambo";
             film.Year = 1980;
-            film.ID = 999;
 
             filmManager.AddFilm(film);
+            filmManager.RemoveFilm(3);
             return View();
         }
     }

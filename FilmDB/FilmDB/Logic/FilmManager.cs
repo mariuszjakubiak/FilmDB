@@ -12,10 +12,8 @@ namespace FilmDB
         {
             using (var context = new FilmContext())
             {
-                context.Films.Add(filmModel);
-                context.SaveChanges();
 
-                /*try
+                try
                 {
                     context.Films.Add(filmModel);
                     context.SaveChanges();
@@ -25,13 +23,20 @@ namespace FilmDB
                     filmModel.ID = 0;
                     context.Films.Add(filmModel);
                     context.SaveChanges();
-                }*/
+                }
             }
             return this;
         }
 
         public FilmManager RemoveFilm(int id)
         {
+            using (var context = new FilmContext())
+            {
+                var film = context.Films.SingleOrDefault(film => film.ID == id);
+                context.Films.Remove(film);
+                context.SaveChanges();
+            }
+
             return this;
         }
 
